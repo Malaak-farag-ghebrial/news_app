@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/states.dart';
 
 
+import '../component/constant.dart';
 import '../modules/business.dart';
 import '../modules/science.dart';
 import '../modules/search.dart';
@@ -73,7 +74,7 @@ class NewsCubit extends Cubit<NewsStates>{
        query: {
          'country':'eg',
          'category':'business',
-         'apiKey':'12ddefdb28964c8dac4128654a34755f'
+         'apiKey': apiKey
        } ,
      ).then((value) {
        // print(value.data.toString());
@@ -97,7 +98,7 @@ class NewsCubit extends Cubit<NewsStates>{
       query: {
         'country':'eg',
         'category':'sports',
-        'apiKey':'12ddefdb28964c8dac4128654a34755f'
+        'apiKey':apiKey
       } ,
     ).then((value) {
       //  print(value.data.toString());
@@ -122,7 +123,7 @@ class NewsCubit extends Cubit<NewsStates>{
      query: {
        'country':'eg',
        'category':'science',
-       'apiKey':'12ddefdb28964c8dac4128654a34755f'
+       'apiKey':apiKey
      } ,
    ).then((value) {
      //  print(value.data.toString());
@@ -144,7 +145,7 @@ class NewsCubit extends Cubit<NewsStates>{
       url: 'v2/everything' ,
       query: {
         'q':'$value',
-        'apiKey':'12ddefdb28964c8dac4128654a34755f'
+        'apiKey':apiKey
       } ,
     ).then((value) {
       // print(value.data.toString());
