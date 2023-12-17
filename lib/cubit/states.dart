@@ -1,6 +1,14 @@
 abstract class NewsStates{}
 class NewsInitialState extends NewsStates{}
 class NewsBtmNavState extends NewsStates{}
+class SelectCountryState extends NewsStates{}
+
+class NewsLoadingState extends NewsStates{}
+class NewsGetSuccessState extends NewsStates{}
+class NewsGetErrorState extends NewsStates{
+  final String error;
+  NewsGetErrorState(this.error);
+}
 class NewsBusinessLoadingState extends NewsStates{}
 class NewsGetBusinessSuccessState extends NewsStates{}
 class NewsGetBusinessErrorState extends NewsStates{

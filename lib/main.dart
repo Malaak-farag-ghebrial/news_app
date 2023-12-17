@@ -25,25 +25,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>NewsCubit(NewsInitialState())..getBusiness()..changeThemeMode(dark: isDark2!),
+      create: (context)=>NewsCubit(NewsInitialState())..getNews('eg')..getBusiness()..changeThemeMode(dark: isDark2!),
       child: BlocConsumer< NewsCubit,NewsStates>(
         listener: (context,state){},
         builder: (context,state)=>MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-              textTheme: const TextTheme(
-                bodyText1: TextStyle(
+              textTheme:  TextTheme(
+                bodyLarge: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: Colors.black38
                 ),
+                titleLarge: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black
+                ),
               ),
+              primaryColorLight: Colors.black12,
               appBarTheme: const AppBarTheme(
                   systemOverlayStyle: SystemUiOverlayStyle(
                       statusBarColor: Colors.white70,
                       statusBarIconBrightness: Brightness.dark
                   ),
                   backgroundColor: Colors.white,
+
                   elevation: 0,
                   titleTextStyle: TextStyle(
                       color: Colors.black,
@@ -82,6 +88,7 @@ class MyApp extends StatelessWidget {
                   )
               ),
               scaffoldBackgroundColor: Colors.black26,
+              primaryColorLight: Colors.white70,
               bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 unselectedItemColor: Colors.white30,
                 selectedItemColor: Colors.deepOrange,
@@ -93,13 +100,17 @@ class MyApp extends StatelessWidget {
               iconTheme:const IconThemeData(
                   color: Colors.grey
               ) ,
-              textTheme: const TextTheme(
-                bodyText1: TextStyle(
+              textTheme:  const TextTheme(
+                bodyLarge: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: Colors.white70
                 ),
-              )
+                titleLarge: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white
+                ),
+              ),
           ),
           themeMode: NewsCubit.get(context).isDark?  ThemeMode.dark : ThemeMode.light,
           debugShowCheckedModeBanner: false,

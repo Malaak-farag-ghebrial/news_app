@@ -20,15 +20,8 @@ Widget Lista(article,screen,context) => InkWell(
 
               decoration: BoxDecoration(
 
-                  borderRadius: BorderRadius.circular(10),
-
-                  image: DecorationImage(
-
-                      image: NetworkImage(
-
-                        '${article['urlToImage']}',),
-
-                      fit: BoxFit.cover)),
+                  borderRadius: BorderRadius.circular(10),),
+              child:article['urlToImage'] !=  null? Image.network('${article['urlToImage'] ?? ''}',fit: BoxFit.cover):Image.asset('assets/news.jpg',fit: BoxFit.cover) ,
 
             ),
 
@@ -66,7 +59,7 @@ Widget Lista(article,screen,context) => InkWell(
 
                        // textDirection: TextDirection.rtl,
 
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
 
                       ),
 

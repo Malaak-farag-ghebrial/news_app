@@ -25,13 +25,13 @@ class SearchScreen extends StatelessWidget {
               height: 50,
               child: TextFormField(
               controller: searchController ,
-              style:Theme.of(context).textTheme.bodyText1 ,
+              style:Theme.of(context).textTheme.bodyLarge ,
               onChanged: (val){
                 cubit.getSearch(val);
               },
               decoration: InputDecoration(
                 label: Text('search',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
                 ),
                focusColor: Colors.white,
 

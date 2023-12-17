@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/states.dart';
+import 'package:news_app/modules/news.dart';
 
 
 import '../component/constant.dart';
@@ -19,38 +20,58 @@ class NewsCubit extends Cubit<NewsStates>{
  int currentIndex =0;
  List <BottomNavigationBarItem> bottomItems = [
    const BottomNavigationBarItem(
+       icon: Icon(Icons.newspaper,),
+       label:'News'
+   ),
+   const BottomNavigationBarItem(
        icon: Icon(Icons.business_center,),
-       label:'business'
+       label:'Business'
    ),
    const BottomNavigationBarItem(
        icon: Icon(Icons.sports_football),
-   label: 'sports'
+   label: 'Sports'
    ),
    const BottomNavigationBarItem(
        icon: Icon(Icons.science),
-   label: 'science'
+   label: 'Science'
    ),
  ];
 
+ int selectedCountry = 0;
+ List country = [
+   'eg',
+   'us',
+ ];
  List screens = [
+   NewsScreen(),
    BusinessScreen(),
    SportsScreen(),
    ScienceScreen(),
    SearchScreen()
  ];
 
+ selectCountry (int index){
+   selectedCountry = index;
+   emit(SelectCountryState());
+   getNews(country[index]);
+ }
+
  changeBtmNavIndex({required int index}){
    currentIndex = index;
    emit(NewsBtmNavState());
    if(index == 0){
+     emit(NewsLoadingState());
+     getNews(country[selectedCountry]);
+   }
+   if(index == 1){
      emit(NewsBusinessLoadingState());
      getBusiness();
    }
-   if(index == 1) {
+   if(index == 2) {
      emit(NewsSportsLoadingState());
      getSports();
    }
-   if(index == 2){
+   if(index == 3){
      emit(NewsScienceLoadingState());
      getScience();
    }
@@ -62,10 +83,28 @@ class NewsCubit extends Cubit<NewsStates>{
  }
 
  List<dynamic> business=[];
+ List<dynamic> news=[];
  List<dynamic> sports=[];
  List<dynamic> science=[];
  List<dynamic> search=[];
 
+  void getNews(String country){
+    emit(NewsLoadingState());
+      DioHelper.getData(
+        url: 'v2/top-headlines' ,
+        query: {
+          'country': country,
+          'apiKey': apiKey}
+      ).then((value) {
+        // print(value.data.toString());
+        news = value.data['articles'];
+        //  print(business);
+        emit(NewsGetSuccessState());
+      }).catchError((e){
+        print('ERROR HAPPENED WHILE GET API IS $e');
+        emit(NewsGetErrorState(e.toString()));
+      });
+  }
  void getBusiness(){
    emit(NewsBusinessLoadingState());
    if(business.isEmpty){
