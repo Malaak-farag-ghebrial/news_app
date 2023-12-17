@@ -18,7 +18,7 @@ class NewsScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  height: 50,
+                  height: 40,
                   child: ListView.builder(
                     shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
